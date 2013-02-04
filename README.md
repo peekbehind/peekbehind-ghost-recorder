@@ -14,6 +14,11 @@ implementation in the *code/* folder.
 You can then customize the implementation, for example adding
 your own function to submit recorded data to your server.
 
+LANGUAGES
+---------
+
+  JavaScript, HTML
+
 AUTHOR
 ------
 
