@@ -7,9 +7,9 @@ PeekBehind Recorder records a ghost of user activity in a web page.
 FIRST STEPS
 -----------
 
-Run the unit tests by opening the files in the *tests/* folder
-and read the source code and comments to get familiar with the
-implementation in the *code/* folder.
+Run the unit tests by opening the files in the *tests/* folder in a browser
+and read the source code and comments to get familiar with the implementation
+in the *code/* folder.
 
 You can then customize the implementation, for example adding
 your own function to submit recorded data to your server.
