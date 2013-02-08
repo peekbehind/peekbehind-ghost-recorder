@@ -4,3 +4,6 @@
 [submodule "code/nada"]
 	path = code/nada
 	url = git@github.com:eric-brechemier/nada.git
+[submodule "tests/qunit"]
+	path = tests/qunit
+	url = https://github.com/jquery/qunit
