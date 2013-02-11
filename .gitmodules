@@ -7,3 +7,6 @@
 [submodule "tests/qunit"]
 	path = tests/qunit
 	url = git://github.com/jquery/qunit.git
+[submodule "tests/json"]
+	path = tests/json
+	url = git://github.com/douglascrockford/JSON-js.git
