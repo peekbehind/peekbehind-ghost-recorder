@@ -14,13 +14,13 @@ test( "compact", function(){
   var details = "#any";
   var specifics = 34;
 
-  deepEqual(
-    compact( [custom,major,minor,patch,[]] ),
-    [custom,major,minor,patch,[]],
-                   "General Custom field and version fields must be copied, " +
-                                         "even with an empty list of records");
+  var ghost0 = [custom,major,minor,patch];
+  var json0 = JSON.stringify( ghost0 );
+  compact( ghost0 );
+  deepEqual( JSON.stringify( ghost0 ), json0,
+                                         "no change expected without records");
 
-  var input0 = [
+  var ghost1 = [
     custom,
     major,minor,patch,
     [
@@ -32,13 +32,12 @@ test( "compact", function(){
       time1
     ]
   ];
-  var json0 = JSON.stringify( input0 );
-  var result0 = compact( input0 );
-  strictEqual( JSON.stringify( input0 ), json0,
-                                   "input ghost data 0 must not be modified");
-  deepEqual( result0, input0,      "a clone is expected for a single record");
+  var json1 = JSON.stringify( ghost1 );
+  compact( ghost1 );
+  strictEqual( JSON.stringify( ghost1 ), json1,
+                                     "no change expected for a single record");
 
-  var input1 = [
+  var ghost2 = [
     custom,
     major,minor,patch,
     [
@@ -58,8 +57,7 @@ test( "compact", function(){
       time2
     ]
   ];
-  var json1 = JSON.stringify( input1 );
-  var output1 = [
+  var expected2 = [
     custom,
     major,minor,patch,
     [
@@ -76,12 +74,10 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result1 = compact( input1 );
-  strictEqual( JSON.stringify( input1 ), json1,
-                                   "input ghost data 1  must not be modified");
-  deepEqual( result1, output1,                    "nesting expected at times");
+  compact( ghost2 );
+  deepEqual( ghost2, expected2,                   "nesting expected at times");
 
-  var input2 = [
+  var ghost3 = [
     custom,
     major,minor,patch,
     [
@@ -101,7 +97,7 @@ test( "compact", function(){
       time2
     ]
   ];
-  var output2 = [
+  var expected3 = [
     custom,
     major,minor,patch,
     [
@@ -119,10 +115,10 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result2 = compact( input2 );
-  deepEqual( result2, output2,                      "nesting expected at top");
+  compact( ghost3 );
+  deepEqual( ghost3, expected3,                     "nesting expected at top");
 
-  var input3 = [
+  var ghost4 = [
     custom,
     major,minor,patch,
     [
@@ -142,7 +138,7 @@ test( "compact", function(){
       time2
     ]
   ];
-  var output3 = [
+  var expected4 = [
     custom,
     major,minor,patch,
     [
@@ -161,10 +157,10 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result3 = compact( input3 );
-  deepEqual( result3, output3,                     "nesting expected at left");
+  compact( ghost4 );
+  deepEqual( ghost4, expected4,                    "nesting expected at left");
 
-  var input4 = [
+  var ghost5 = [
     custom,
     major,minor,patch,
     [
@@ -184,7 +180,7 @@ test( "compact", function(){
       time2
     ]
   ];
-  var output4 = [
+  var expected5 = [
     custom,
     major,minor,patch,
     [
@@ -204,10 +200,10 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result4 = compact( input4 );
-  deepEqual( result4, output4,            "nesting expected at activity type");
+  compact( ghost5 );
+  deepEqual( ghost5, expected5,           "nesting expected at activity type");
 
-  var input5 = [
+  var ghost6 = [
     custom,
     major,minor,patch,
     [
@@ -227,7 +223,7 @@ test( "compact", function(){
       time2
     ]
   ];
-  var output5 = [
+  var expected6 = [
     custom,
     major,minor,patch,
     [
@@ -248,10 +244,10 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result5 = compact( input5 );
-  deepEqual( result5, output5,                     "nesting expected at path");
+  compact( ghost6 );
+  deepEqual( ghost6, expected6,                    "nesting expected at path");
 
-  var input6 = [
+  var ghost7 = [
     custom,
     major,minor,patch,
     [
@@ -271,12 +267,12 @@ test( "compact", function(){
       time2
     ]
   ];
-  var json6 = JSON.stringify( input6 );
-  var result6 = compact( input6 );
-  strictEqual( JSON.stringify( result6 ), json6,
+  var json7 = JSON.stringify( ghost7 );
+  compact( ghost7 );
+  strictEqual( JSON.stringify( ghost7 ), json7,
                 "no extra nesting expected with different ancestor selectors");
 
-  var input7 = [
+  var ghost8 = [
     custom,
     major,minor,patch,
     [
@@ -336,7 +332,7 @@ test( "compact", function(){
       6000
     ]
   ];
-  var output7 = [
+  var expected8 = [
     custom,
     major,minor,patch,
     [
@@ -395,10 +391,10 @@ test( "compact", function(){
       6000
     ]
   ];
-  var result7 = compact( input7 );
-  deepEqual( result7, output7,              "five levels of nesting expected");
+  compact( ghost8 );
+  deepEqual( ghost8, expected8,             "five levels of nesting expected");
 
-  var input8 = [
+  var ghost9 = [
     custom,
     major,minor,patch,
     [
@@ -442,7 +438,7 @@ test( "compact", function(){
       5000
     ]
   ];
-  var output8 = [
+  var expected9 = [
     custom,
     major,minor,patch,
     [
@@ -468,10 +464,10 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result8 = compact( input8 );
-  deepEqual( result8, output8,   "nesting at times expected with five values");
+  compact( ghost9 );
+  deepEqual( ghost9, expected9,  "nesting at times expected with five values");
 
-  var input9 = [
+  var ghost10 = [
     custom,
     major,minor,patch,
     [
@@ -515,7 +511,7 @@ test( "compact", function(){
       time2
     ]
   ];
-  var output9 = [
+  var expected10 = [
     custom,
     major,minor,patch,
     [
@@ -553,11 +549,11 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result9 = compact( input9 );
-  deepEqual( result9, output9,
+  compact( ghost10 );
+  deepEqual( ghost10, expected10,
                          "nesting expected at activity type with five values");
 
-  var input10 = [
+  var ghost11 = [
     custom,
     major,minor,patch,
     [
@@ -577,7 +573,7 @@ test( "compact", function(){
       time1
     ]
   ];
-  var output10 = [
+  var expected11 = [
     custom,
     major,minor,patch,
     [
@@ -591,11 +587,11 @@ test( "compact", function(){
       []
     ]
   ];
-  var result10 = compact( input10 );
-  deepEqual( result10, output10,
+  compact( ghost11 );
+  deepEqual( ghost11, expected11,
      "nesting expected at details with empty arrays when details are omitted");
 
-  var input11 = [
+  var ghost12 = [
     custom,
     major,minor,patch,
     [
@@ -619,7 +615,7 @@ test( "compact", function(){
       specifics
     ],
   ];
-  var output11 = [
+  var expected12 = [
     custom,
     major,minor,patch,
     [
@@ -639,12 +635,12 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result11 = compact( input11 );
-  deepEqual( result11, output11,
+  compact( ghost12 );
+  deepEqual( ghost12, expected12,
                                      "nesting expected at details even with " +
                                       "common value of details and specifics");
 
-  var input12 = [
+  var ghost13 = [
     custom,
     major,minor,patch,
     [
@@ -667,7 +663,7 @@ test( "compact", function(){
       [1,5,9]
     ],
   ];
-  var output12 = [
+  var expected13 = [
     custom,
     major,minor,patch,
     [
@@ -686,7 +682,7 @@ test( "compact", function(){
       ]
     ]
   ];
-  var result12 = compact( input12 );
-  deepEqual( result12, output12,
+  compact( ghost13 );
+  deepEqual( ghost13, expected13,
                       "nesting expected at details with or without specifics");
 });
