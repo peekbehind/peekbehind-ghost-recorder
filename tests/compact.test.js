@@ -17,7 +17,7 @@ test( "compact", function() {
   var ghost0 = [custom,major,minor,patch];
   var json0 = JSON.stringify( ghost0 );
   compact( ghost0 );
-  deepEqual( JSON.stringify( ghost0 ), json0,
+  strictEqual( JSON.stringify( ghost0 ), json0,
                                          "no change expected without records");
 
   var ghost1 = [
