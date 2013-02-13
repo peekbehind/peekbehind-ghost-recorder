@@ -1,4 +1,4 @@
-test( "compact", function(){
+test( "compact", function() {
 
   var custom = 42;
   var major = -1;
