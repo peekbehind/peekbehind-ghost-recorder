@@ -14,18 +14,23 @@ test( "compact", function(){
   var details = "#any";
   var specifics = 34;
 
-  deepEqual( compact( [] ), [],
-                         "empty array expected when empty array is compacted");
+  deepEqual(
+    compact( [custom,major,minor,patch,[]] ),
+    [custom,major,minor,patch,[]],
+                   "General Custom field and version fields must be copied, " +
+                                         "even with an empty list of records");
 
   var input0 = [
     custom,
     major,minor,patch,
-    container,
-    path,
-    activity,
-    left,
-    top,
-    time1
+    [
+      container,
+      path,
+      activity,
+      left,
+      top,
+      time1
+    ]
   ];
   var json0 = JSON.stringify( input0 );
   var result0 = compact( input0 );
